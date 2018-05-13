@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 package com.thesis.dawhey.shoppingcart
 
 import android.support.v7.app.AppCompatActivity
@@ -11,17 +10,3 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 }
-=======
-package com.thesis.dawhey.shoppingcart
-
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-}
->>>>>>> Stashed changes

@@ -1,15 +1,6 @@
-<<<<<<< Updated upstream
 <resources>
     <string name="app_name">ShoppingCart</string>
     <string name="log_in">Log in</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
 </resources>
-=======
-<resources>
-    <string name="app_name">ShoppingCart</string>
-    <string name="log_in">Log in</string>
-    <string name="password">Password</string>
-    <string name="username">Username</string>
-</resources>
->>>>>>> Stashed changes

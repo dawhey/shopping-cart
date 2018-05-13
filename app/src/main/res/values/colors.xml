@@ -1,17 +1,7 @@
-<<<<<<< Updated upstream
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#f44336</color>
-    <color name="colorPrimaryDark">#ba000d</color>
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#0069c0</color>
     <color name="colorAccent">#ff9100</color>
-    <color name="colorPrimaryLight">#ff7961</color>
+    <color name="colorPrimaryLight">#6ec6ff</color>
 </resources>
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">#f44336</color>
-    <color name="colorPrimaryDark">#ba000d</color>
-    <color name="colorAccent">#ff9100</color>
-    <color name="colorPrimaryLight">#ff7961</color>
-</resources>
->>>>>>> Stashed changes

@@ -1,10 +1,4 @@
-<<<<<<< Updated upstream
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="login_margin">40dp</dimen>
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="login_margin">40dp</dimen>
->>>>>>> Stashed changes
 </resources>
