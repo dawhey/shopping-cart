@@ -1,4 +1,4 @@
-package com.thesis.dawhey.shoppingcart.ui
+package com.thesis.dawhey.shoppingcart.viewmodels
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel

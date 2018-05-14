@@ -3,11 +3,12 @@ package com.thesis.dawhey.shoppingcart.ui
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.ViewModelProvider
 import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.thesis.dawhey.shoppingcart.BR
 import com.thesis.dawhey.shoppingcart.R
+import com.thesis.dawhey.shoppingcart.databinding.ActivityLoginBinding
+import com.thesis.dawhey.shoppingcart.viewmodels.LoginViewModel
 
 class LoginActivity : AppCompatActivity(), LifecycleOwner {
 
@@ -17,8 +18,10 @@ class LoginActivity : AppCompatActivity(), LifecycleOwner {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        supportActionBar?.title = "Log in"
         viewModel = ViewModelProvider.AndroidViewModelFactory(application).create(LoginViewModel::class.java)
-        val binding: ViewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.setVariable(BR.vm, viewModel)
+        binding.setLifecycleOwner(this)
     }
 }
