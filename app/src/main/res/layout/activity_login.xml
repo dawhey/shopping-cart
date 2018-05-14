@@ -1,72 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.LoginActivity">
+    <data>
+        <variable
+            name="vm"
+            type="com.thesis.dawhey.shoppingcart.ui.LoginViewModel"
+            />
+    </data>
+    <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LoginActivity">
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginEnd="@dimen/login_margin"
-        android:layout_marginStart="@dimen/login_margin"
-        android:layout_marginTop="60dp"
-        android:adjustViewBounds="false"
-        android:cropToPadding="false"
-        android:scaleType="fitXY"
-        android:src="@drawable/cart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/usernameInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/login_margin"
-        android:layout_marginStart="@dimen/login_margin"
-        android:layout_marginTop="40dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:background="@drawable/input_login"
-        android:hint="@string/username"
-        android:inputType="text"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icon" />
+    android:layout_height="match_parent">
 
 
-    <EditText
-        android:id="@+id/passwordInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/login_margin"
-        android:layout_marginStart="@dimen/login_margin"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:background="@drawable/input_login"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usernameInput" />
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginEnd="@dimen/login_margin"
+            android:layout_marginStart="@dimen/login_margin"
+            android:layout_marginTop="60dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:scaleType="fitXY"
+            android:src="@drawable/cart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginEnd="@dimen/login_margin"
-        android:layout_marginStart="@dimen/login_margin"
-        android:background="@drawable/login_button"
-        android:text="@string/log_in"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/usernameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/login_margin"
+            android:layout_marginStart="@dimen/login_margin"
+            android:layout_marginTop="40dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:background="@drawable/input_login"
+            android:hint="@string/username"
+            android:text="@{vm.user.userName}"
+            android:inputType="text"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon" />
 
 
-</android.support.constraint.ConstraintLayout>
+        <EditText
+            android:id="@+id/passwordInput"
+            android:text="@{vm.user.password}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/login_margin"
+            android:layout_marginStart="@dimen/login_margin"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:background="@drawable/input_login"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/usernameInput" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:layout_marginEnd="@dimen/login_margin"
+            android:layout_marginStart="@dimen/login_margin"
+            android:background="@drawable/login_button"
+            android:text="@string/log_in"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
