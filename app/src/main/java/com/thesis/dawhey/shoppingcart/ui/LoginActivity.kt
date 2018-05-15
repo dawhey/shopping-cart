@@ -18,10 +18,14 @@ class LoginActivity : AppCompatActivity(), LifecycleOwner {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        supportActionBar?.title = "Log in"
+        supportActionBar?.title = getString(R.string.log_in)
         viewModel = ViewModelProvider.AndroidViewModelFactory(application).create(LoginViewModel::class.java)
         val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.setVariable(BR.vm, viewModel)
         binding.setLifecycleOwner(this)
+
+        if (viewModel.isAuthenticated) {
+
+        }
     }
 }
