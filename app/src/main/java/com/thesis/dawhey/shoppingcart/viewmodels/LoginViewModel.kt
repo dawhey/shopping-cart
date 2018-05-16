@@ -31,15 +31,12 @@ class LoginViewModel(application: Application): AndroidViewModel(application){
                         viewStatus.value = ViewStatus.ERROR
                     }
 
-                    override fun onSuccess(t: AuthenticationResponse) {
-                        when (t.status) {
-                            ResponseStatus.SUCCESS -> {
-                                viewStatus.value = ViewStatus.SUCCESS
-                                userRepository.saveUserToken(t.token)
-                            }
-                            ResponseStatus.FAILURE -> viewStatus.value = ViewStatus.ERROR
+                    override fun onSuccess(t: AuthenticationResponse) = when (t.status) {
+                        ResponseStatus.SUCCESS -> {
+                            viewStatus.value = ViewStatus.SUCCESS
+                            userRepository.saveUserToken(t.token)
                         }
-
+                        ResponseStatus.FAILURE -> viewStatus.value = ViewStatus.ERROR
                     }
                 })
     }
