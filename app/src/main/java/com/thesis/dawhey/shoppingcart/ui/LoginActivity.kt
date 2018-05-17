@@ -24,7 +24,10 @@ class LoginActivity : AppCompatActivity(), LifecycleOwner {
         supportActionBar?.title = getString(R.string.log_in)
         viewModel = ViewModelProvider.AndroidViewModelFactory(application).create(LoginViewModel::class.java)
         addViewStatusObserver()
-        loginButton.setOnClickListener { viewModel.authenticate(User(usernameInput.text.toString(), passwordInput.text.toString())) }
+        loginButton.setOnClickListener {
+            viewModel.user = User(usernameInput.text.toString(), passwordInput.text.toString())
+            viewModel.request()
+        }
 
         if (viewModel.isAuthenticated) { startMainActivity() }
     }
@@ -37,7 +40,7 @@ class LoginActivity : AppCompatActivity(), LifecycleOwner {
                     when (status) {
                         ViewStatus.LOADING -> progressBar.visibility = View.VISIBLE
                         ViewStatus.ERROR -> {
-                            Snackbar.make(findViewById(android.R.id.content), "Authentication error", Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(findViewById(android.R.id.content), getString(R.string.auth_error), Snackbar.LENGTH_SHORT).show()
                             progressBar.visibility = View.GONE
                         }
                         ViewStatus.SUCCESS -> {

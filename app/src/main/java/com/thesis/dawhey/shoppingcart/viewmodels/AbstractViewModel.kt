@@ -1,0 +1,40 @@
+package com.thesis.dawhey.shoppingcart.viewmodels
+
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.MutableLiveData
+import com.thesis.dawhey.shoppingcart.response.Response
+import com.thesis.dawhey.shoppingcart.response.ResponseStatus
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
+
+abstract class AbstractViewModel<T: Response>(application: Application): AndroidViewModel(application){
+
+    val viewStatus = MutableLiveData<ViewStatus>()
+
+    fun request() {
+        viewStatus.value = ViewStatus.LOADING
+        provideObservableData()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : DisposableSingleObserver<T>() {
+
+                    override fun onError(e: Throwable) = this@AbstractViewModel.onError(e)
+
+                    override fun onSuccess(t: T) = this@AbstractViewModel.onSuccess(t)
+                })
+    }
+
+    abstract fun provideObservableData(): Single<T>
+
+    open fun onError(e: Throwable) {
+        viewStatus.value = ViewStatus.ERROR
+    }
+
+    open fun onSuccess(response: T) = when (response.status) {
+        ResponseStatus.SUCCESS -> viewStatus.value = ViewStatus.SUCCESS
+        ResponseStatus.FAILURE -> viewStatus.value = ViewStatus.ERROR
+    }
+}

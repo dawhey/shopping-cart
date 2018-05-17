@@ -2,7 +2,9 @@ package com.thesis.dawhey.shoppingcart.api
 
 import com.thesis.dawhey.shoppingcart.BuildConfig
 import com.thesis.dawhey.shoppingcart.models.User
+import com.thesis.dawhey.shoppingcart.request.BindToCartRequest
 import com.thesis.dawhey.shoppingcart.response.AuthenticationResponse
+import com.thesis.dawhey.shoppingcart.response.BindToCartResponse
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -14,8 +16,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 
 interface ApiService {
+
     @POST("authenticate")
-    fun authenticateUser(@Body user: User): Single<AuthenticationResponse>
+    fun authenticateUser(@Body request: User): Single<AuthenticationResponse>
+
+    @POST("bind")
+    fun bindToCart(@Body request: BindToCartRequest): Single<BindToCartResponse>
 
     companion object {
         fun create(): ApiService {

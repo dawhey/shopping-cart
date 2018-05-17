@@ -3,4 +3,5 @@
     <string name="log_in">Log in</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
+    <string name="auth_error">Authentication error. Please try again.</string>
 </resources>
