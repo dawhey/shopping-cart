@@ -1,12 +1,11 @@
 package com.thesis.dawhey.shoppingcart.repositories
 
 import com.thesis.dawhey.shoppingcart.api.ApiService
-import com.thesis.dawhey.shoppingcart.models.User
 import com.thesis.dawhey.shoppingcart.prefs
+import com.thesis.dawhey.shoppingcart.request.AuthRequest
 import com.thesis.dawhey.shoppingcart.request.BindToCartRequest
-import com.thesis.dawhey.shoppingcart.response.AuthenticationResponse
+import com.thesis.dawhey.shoppingcart.response.AuthResponse
 import com.thesis.dawhey.shoppingcart.response.BindToCartResponse
-import com.thesis.dawhey.shoppingcart.response.ResponseStatus
 import io.reactivex.Single
 
 class UserRepositoryImpl : UserRepository {
@@ -15,8 +14,8 @@ class UserRepositoryImpl : UserRepository {
         ApiService.create()
     }
 
-    override fun authenticateUser(user: User): Single<AuthenticationResponse> {
-        return api.authenticateUser(user)
+    override fun authenticateUser(request: AuthRequest): Single<AuthResponse> {
+        return api.authenticateUser(request)
     }
 
     override fun saveUserToken(token: String?) {

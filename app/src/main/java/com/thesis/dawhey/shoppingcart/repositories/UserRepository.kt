@@ -1,14 +1,14 @@
 package com.thesis.dawhey.shoppingcart.repositories
 
-import com.thesis.dawhey.shoppingcart.models.User
+import com.thesis.dawhey.shoppingcart.request.AuthRequest
 import com.thesis.dawhey.shoppingcart.request.BindToCartRequest
-import com.thesis.dawhey.shoppingcart.response.AuthenticationResponse
+import com.thesis.dawhey.shoppingcart.response.AuthResponse
 import com.thesis.dawhey.shoppingcart.response.BindToCartResponse
 import io.reactivex.Single
 
 interface UserRepository {
 
-    fun authenticateUser(user: User): Single<AuthenticationResponse>
+    fun authenticateUser(request: AuthRequest): Single<AuthResponse>
 
     fun saveUserToken(token: String?)
 

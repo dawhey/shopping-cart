@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/loadingOverlay"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
 
     <ProgressBar
@@ -21,6 +22,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+<android.support.constraint.ConstraintLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/icon"
@@ -62,7 +67,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@id/accountIcon"
-            android:background="@drawable/input_login"
             android:hint="@string/username"
             android:inputType="text"
             android:padding="7dp" />
@@ -93,7 +97,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:background="@drawable/input_login"
             android:hint="@string/password"
             android:layout_toEndOf="@id/passwordIcon"
             android:inputType="textPassword"
@@ -116,3 +119,4 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
+</RelativeLayout>

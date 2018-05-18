@@ -7,7 +7,7 @@ import com.thesis.dawhey.shoppingcart.request.BindToCartRequest
 import com.thesis.dawhey.shoppingcart.response.BindToCartResponse
 import io.reactivex.Single
 
-class CartViewModel(application: Application) : AbstractViewModel<BindToCartResponse, BindToCartRequest>(application) {
+class CartViewModel(application: Application) : RequestResponseViewModel<BindToCartResponse, BindToCartRequest>(application) {
 
     override lateinit var request: BindToCartRequest
 
