@@ -6,7 +6,7 @@ import com.thesis.dawhey.shoppingcart.R
 import com.thesis.dawhey.shoppingcart.request.BindToCartRequest
 import com.thesis.dawhey.shoppingcart.response.BindToCartResponse
 import com.thesis.dawhey.shoppingcart.viewmodels.CartViewModel
-class CartActivity : ViewStatusActivity<BindToCartResponse, BindToCartRequest, CartViewModel>() {
+class CartActivity : RequestResponseActivity<BindToCartResponse, BindToCartRequest, CartViewModel>() {
 
     override fun provideViewModel(): CartViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(CartViewModel::class.java)
 

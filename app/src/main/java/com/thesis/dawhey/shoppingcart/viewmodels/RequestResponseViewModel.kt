@@ -11,7 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-abstract class AbstractViewModel<T: Response, S: Request>(application: Application): AndroidViewModel(application){
+abstract class RequestResponseViewModel<T: Response, S: Request>(application: Application): AndroidViewModel(application){
 
     val viewStatus = MutableLiveData<ViewStatus>()
 
@@ -24,9 +24,9 @@ abstract class AbstractViewModel<T: Response, S: Request>(application: Applicati
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : DisposableSingleObserver<T>() {
 
-                    override fun onError(e: Throwable) = this@AbstractViewModel.onError(e)
+                    override fun onError(e: Throwable) = this@RequestResponseViewModel.onError(e)
 
-                    override fun onSuccess(t: T) = this@AbstractViewModel.onSuccess(t)
+                    override fun onSuccess(t: T) = this@RequestResponseViewModel.onSuccess(t)
                 })
     }
 

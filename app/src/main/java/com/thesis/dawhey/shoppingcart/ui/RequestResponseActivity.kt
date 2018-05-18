@@ -4,13 +4,14 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.thesis.dawhey.shoppingcart.R
 import com.thesis.dawhey.shoppingcart.request.Request
 import com.thesis.dawhey.shoppingcart.response.Response
-import com.thesis.dawhey.shoppingcart.viewmodels.AbstractViewModel
+import com.thesis.dawhey.shoppingcart.viewmodels.RequestResponseViewModel
 import com.thesis.dawhey.shoppingcart.viewmodels.ViewStatus
 import kotlinx.android.synthetic.main.activity_login.*
 
-abstract class ViewStatusActivity<T: Response, S: Request, V: AbstractViewModel<T, S>> : AppCompatActivity() {
+abstract class RequestResponseActivity<T: Response, S: Request, V: RequestResponseViewModel<T, S>> : AppCompatActivity() {
 
     open val viewModel: V by lazy {
         provideViewModel()
@@ -36,14 +37,17 @@ abstract class ViewStatusActivity<T: Response, S: Request, V: AbstractViewModel<
 
     open fun onError() {
         progressBar.visibility = View.GONE
+        loadingOverlay.setBackgroundColor(getColor(R.color.transparent))
     }
 
     open fun onSuccess() {
         progressBar.visibility = View.GONE
+        loadingOverlay.setBackgroundColor(getColor(R.color.transparent))
     }
 
     open fun onLoading() {
         progressBar.visibility = View.VISIBLE
+        loadingOverlay.setBackgroundColor(getColor(R.color.darkOverlay))
     }
 
     abstract fun provideViewModel(): V

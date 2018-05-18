@@ -8,7 +8,7 @@ import com.thesis.dawhey.shoppingcart.request.AuthRequest
 import com.thesis.dawhey.shoppingcart.response.AuthResponse
 import io.reactivex.Single
 
-class LoginViewModel(application: Application): AbstractViewModel<AuthResponse, AuthRequest>(application){
+class LoginViewModel(application: Application): RequestResponseViewModel<AuthResponse, AuthRequest>(application){
 
     override lateinit var request: AuthRequest
 

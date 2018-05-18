@@ -11,7 +11,7 @@ import com.thesis.dawhey.shoppingcart.response.AuthResponse
 import com.thesis.dawhey.shoppingcart.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : ViewStatusActivity<AuthResponse, AuthRequest, LoginViewModel>(), LifecycleOwner {
+class LoginActivity : RequestResponseActivity<AuthResponse, AuthRequest, LoginViewModel>(), LifecycleOwner {
 
     override fun provideLayoutResource(): Int = R.layout.activity_login
 
