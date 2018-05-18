@@ -1,3 +1,3 @@
 package com.thesis.dawhey.shoppingcart.request
 
-data class BindToCartRequest(val token: String, val cartId: String)
+data class BindToCartRequest(val token: String, val cartId: String) : Request

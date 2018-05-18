@@ -1,55 +1,42 @@
 package com.thesis.dawhey.shoppingcart.ui
 
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
-import android.view.View
 import com.thesis.dawhey.shoppingcart.R
-import com.thesis.dawhey.shoppingcart.models.User
+import com.thesis.dawhey.shoppingcart.request.AuthRequest
+import com.thesis.dawhey.shoppingcart.response.AuthResponse
 import com.thesis.dawhey.shoppingcart.viewmodels.LoginViewModel
-import com.thesis.dawhey.shoppingcart.viewmodels.ViewStatus
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity(), LifecycleOwner {
+class LoginActivity : ViewStatusActivity<AuthResponse, AuthRequest, LoginViewModel>(), LifecycleOwner {
 
-    private lateinit var viewModel: LoginViewModel
+    override fun provideLayoutResource(): Int = R.layout.activity_login
+
+    override fun provideToolbarTitle(): String = getString(R.string.log_in)
+
+    override fun provideViewModel(): LoginViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(LoginViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        supportActionBar?.title = getString(R.string.log_in)
-        viewModel = ViewModelProvider.AndroidViewModelFactory(application).create(LoginViewModel::class.java)
-        addViewStatusObserver()
         loginButton.setOnClickListener {
-            viewModel.request = User(usernameInput.text.toString(), passwordInput.text.toString())
+            viewModel.request = AuthRequest(usernameInput.text.toString(), passwordInput.text.toString())
             viewModel.request()
         }
 
         if (viewModel.isAuthenticated) { startCartActivity() }
     }
 
+    override fun onSuccess() {
+        super.onSuccess()
+        startCartActivity()
+    }
 
-
-    private fun addViewStatusObserver() {
-        viewModel.viewStatus.observe(
-                this, Observer {status: ViewStatus? ->
-                    when (status) {
-                        ViewStatus.LOADING -> progressBar.visibility = View.VISIBLE
-                        ViewStatus.ERROR -> {
-                            Snackbar.make(findViewById(android.R.id.content), getString(R.string.auth_error), Snackbar.LENGTH_SHORT).show()
-                            progressBar.visibility = View.GONE
-                        }
-                        ViewStatus.SUCCESS -> {
-                            progressBar.visibility = View.GONE
-                            startCartActivity()
-                        }
-                    }
-                }
-        )
+    override fun onError() {
+        super.onError()
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.auth_error), Snackbar.LENGTH_SHORT).show()
     }
 
     private fun startCartActivity() {
