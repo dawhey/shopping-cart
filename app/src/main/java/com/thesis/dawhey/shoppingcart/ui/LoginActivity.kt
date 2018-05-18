@@ -34,8 +34,8 @@ class LoginActivity : RequestResponseActivity<AuthResponse, AuthRequest, LoginVi
         startCartActivity()
     }
 
-    override fun onError() {
-        super.onError()
+    override fun onApiError() {
+        super.onApiError()
         Snackbar.make(findViewById(android.R.id.content), getString(R.string.auth_error), Snackbar.LENGTH_SHORT).show()
     }
 

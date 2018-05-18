@@ -2,6 +2,7 @@ package com.thesis.dawhey.shoppingcart.ui
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.thesis.dawhey.shoppingcart.R
@@ -30,13 +31,20 @@ abstract class RequestResponseActivity<T: Response, S: Request, V: RequestRespon
                 this, Observer {status: ViewStatus? ->
             when (status) {
                 ViewStatus.LOADING -> onLoading()
-                ViewStatus.ERROR -> onError()
+                ViewStatus.API_ERROR -> onApiError()
                 ViewStatus.SUCCESS -> onSuccess()
+                ViewStatus.CONNECTION_ERROR -> onConnectionError()
             }
         })
     }
 
-    open fun onError() {
+    open fun onConnectionError() {
+        progressBar.visibility = View.GONE
+        loadingOverlay.setBackgroundColor(getColor(R.color.transparent))
+        Snackbar.make(findViewById(android.R.id.content), "Connection error. Try again later.", Snackbar.LENGTH_SHORT).show()
+    }
+
+    open fun onApiError() {
         progressBar.visibility = View.GONE
         loadingOverlay.setBackgroundColor(getColor(R.color.transparent))
     }
