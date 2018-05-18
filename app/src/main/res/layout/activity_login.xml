@@ -28,7 +28,7 @@
         android:layout_height="180dp"
         android:layout_marginEnd="@dimen/login_margin"
         android:layout_marginStart="@dimen/login_margin"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
         android:scaleType="fitXY"
@@ -53,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_account"
+            android:tint="@color/darkGrey"
             android:layout_centerVertical="true" />
 
         <EditText
@@ -84,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_password"
+            android:tint="@color/darkGrey"
             android:layout_centerVertical="true"/>
 
         <EditText

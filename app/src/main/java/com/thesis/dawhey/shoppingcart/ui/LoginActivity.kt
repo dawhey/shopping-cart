@@ -25,16 +25,16 @@ class LoginActivity : AppCompatActivity(), LifecycleOwner {
         viewModel = ViewModelProvider.AndroidViewModelFactory(application).create(LoginViewModel::class.java)
         addViewStatusObserver()
         loginButton.setOnClickListener {
-            viewModel.user = User(usernameInput.text.toString(), passwordInput.text.toString())
+            viewModel.request = User(usernameInput.text.toString(), passwordInput.text.toString())
             viewModel.request()
         }
 
-        if (viewModel.isAuthenticated) { startMainActivity() }
+        if (viewModel.isAuthenticated) { startCartActivity() }
     }
 
 
 
-    fun addViewStatusObserver() {
+    private fun addViewStatusObserver() {
         viewModel.viewStatus.observe(
                 this, Observer {status: ViewStatus? ->
                     when (status) {
@@ -45,15 +45,15 @@ class LoginActivity : AppCompatActivity(), LifecycleOwner {
                         }
                         ViewStatus.SUCCESS -> {
                             progressBar.visibility = View.GONE
-                            startMainActivity()
+                            startCartActivity()
                         }
                     }
                 }
         )
     }
 
-    private fun startMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+    private fun startCartActivity() {
+        val intent = Intent(this, CartActivity::class.java)
         startActivity(intent)
         finish()
     }

@@ -10,13 +10,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-abstract class AbstractViewModel<T: Response>(application: Application): AndroidViewModel(application){
+abstract class AbstractViewModel<T: Response, S>(application: Application): AndroidViewModel(application){
 
     val viewStatus = MutableLiveData<ViewStatus>()
 
+    abstract var request: S
+
     fun request() {
         viewStatus.value = ViewStatus.LOADING
-        provideObservableData()
+        provideObservableResultData(request)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : DisposableSingleObserver<T>() {
@@ -27,7 +29,7 @@ abstract class AbstractViewModel<T: Response>(application: Application): Android
                 })
     }
 
-    abstract fun provideObservableData(): Single<T>
+    abstract fun provideObservableResultData(request: S): Single<T>
 
     open fun onError(e: Throwable) {
         viewStatus.value = ViewStatus.ERROR

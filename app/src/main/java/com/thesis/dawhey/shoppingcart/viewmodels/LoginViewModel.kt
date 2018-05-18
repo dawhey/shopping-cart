@@ -14,15 +14,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class LoginViewModel(application: Application): AbstractViewModel<AuthenticationResponse>(application){
+class LoginViewModel(application: Application): AbstractViewModel<AuthenticationResponse, User>(application){
 
-    lateinit var user: User
+    override lateinit var request: User
 
     private val userRepository: UserRepository = UserRepositoryImpl()
 
     val isAuthenticated: Boolean = !prefs.token.isNullOrEmpty()
 
-    override fun provideObservableData(): Single<AuthenticationResponse> = userRepository.authenticateUser(user)
+    override fun provideObservableResultData(request: User): Single<AuthenticationResponse> = userRepository.authenticateUser(request)
 
     override fun onSuccess(response: AuthenticationResponse) {
         super.onSuccess(response)
