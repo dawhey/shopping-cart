@@ -20,36 +20,70 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/usernameInput"
+        <RelativeLayout
+            android:id="@+id/usernameView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/login_margin"
             android:layout_marginStart="@dimen/login_margin"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="40dp"
-            android:background="@drawable/input_login"
-            android:hint="@string/username"
-            android:inputType="text"
-            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/icon">
+
+                <ImageView
+                    android:id="@+id/accountIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_account"
+                    android:tint="@color/darkGrey"
+                    android:layout_centerVertical="true" />
+
+                <EditText
+                    android:id="@+id/usernameInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/accountIcon"
+                    android:background="@drawable/input_login"
+                    android:hint="@string/username"
+                    android:inputType="text"
+                    android:padding="7dp" />
+
+        </RelativeLayout>
 
 
-        <EditText
-            android:id="@+id/passwordInput"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/login_margin"
             android:layout_marginStart="@dimen/login_margin"
             android:layout_marginTop="20dp"
-            android:background="@drawable/input_login"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/usernameInput" />
+            app:layout_constraintTop_toBottomOf="@id/usernameView">
+
+                <ImageView
+                    android:id="@+id/passwordIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_password"
+                    android:tint="@color/darkGrey"
+                    android:layout_centerVertical="true"/>
+
+                <EditText
+                    android:id="@+id/passwordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/input_login"
+                    android:hint="@string/password"
+                    android:layout_toEndOf="@id/passwordIcon"
+                    android:inputType="textPassword"
+                    android:padding="7dp" />
+
+        </RelativeLayout>
 
         <Button
             android:id="@+id/loginButton"

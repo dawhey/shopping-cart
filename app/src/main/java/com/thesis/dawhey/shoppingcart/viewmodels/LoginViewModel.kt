@@ -9,38 +9,23 @@ import com.thesis.dawhey.shoppingcart.repositories.UserRepository
 import com.thesis.dawhey.shoppingcart.repositories.UserRepositoryImpl
 import com.thesis.dawhey.shoppingcart.response.AuthenticationResponse
 import com.thesis.dawhey.shoppingcart.response.ResponseStatus
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class LoginViewModel(application: Application): AndroidViewModel(application){
+class LoginViewModel(application: Application): AbstractViewModel<AuthenticationResponse, User>(application){
 
-    val viewStatus = MutableLiveData<ViewStatus>()
+    override lateinit var request: User
 
-    val userRepository: UserRepository = UserRepositoryImpl()
+    private val userRepository: UserRepository = UserRepositoryImpl()
 
     val isAuthenticated: Boolean = !prefs.token.isNullOrEmpty()
 
-    fun authenticate(user: User) {
-        viewStatus.value = ViewStatus.LOADING
-        userRepository.authenticateUser(user)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(object : DisposableSingleObserver<AuthenticationResponse>() {
-                    override fun onError(e: Throwable) {
-                        viewStatus.value = ViewStatus.ERROR
-                    }
+    override fun provideObservableResultData(request: User): Single<AuthenticationResponse> = userRepository.authenticateUser(request)
 
-                    override fun onSuccess(t: AuthenticationResponse) {
-                        when (t.status) {
-                            ResponseStatus.SUCCESS -> {
-                                viewStatus.value = ViewStatus.SUCCESS
-                                userRepository.saveUserToken(t.token)
-                            }
-                            ResponseStatus.FAILURE -> viewStatus.value = ViewStatus.ERROR
-                        }
-
-                    }
-                })
+    override fun onSuccess(response: AuthenticationResponse) {
+        super.onSuccess(response)
+        userRepository.saveUserToken(response.token)
     }
 }
