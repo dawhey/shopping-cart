@@ -11,7 +11,7 @@ class PreferencesManager(context: Context) {
     val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
     var token: String?
-        get() =  null //prefs.getString(KEY_TOKEN, null)
+        get() =  "go_to_cart" //prefs.getString(KEY_TOKEN, null)
         set(value) = prefs.edit().putString(KEY_TOKEN, value).apply()
 
 

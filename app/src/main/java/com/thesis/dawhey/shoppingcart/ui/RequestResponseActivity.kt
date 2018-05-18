@@ -21,6 +21,7 @@ abstract class RequestResponseActivity<T: Response, S: Request, V: RequestRespon
         super.onCreate(savedInstanceState)
         setContentView(provideLayoutResource())
         supportActionBar?.title = provideToolbarTitle()
+        supportActionBar?.setBackgroundDrawable(getDrawable(R.drawable.primary_gradient))
         addViewStatusObserver()
     }
 

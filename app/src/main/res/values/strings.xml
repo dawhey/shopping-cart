@@ -4,4 +4,6 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="auth_error">Authentication error. Please try again.</string>
+    <string name="next">Next</string>
+    <string name="cart_id">Cart ID</string>
 </resources>
