@@ -8,4 +8,10 @@
     <string name="cart_id">Cart ID</string>
     <string name="invalid_cart_id">No cart with provided ID.</string>
     <string name="log_out">Log out</string>
+    <string name="scanned_products">Scanned products</string>
+    <string name="cart_id_subtitle">Shopping cart ID:</string>
+
+    <string name="price_place_holder"> %1$s zł.</string>
+    <string name="weight_place_holder">%1$sg</string>
+
 </resources>
