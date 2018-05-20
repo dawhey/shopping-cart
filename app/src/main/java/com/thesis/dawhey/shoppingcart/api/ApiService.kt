@@ -5,6 +5,7 @@ import com.thesis.dawhey.shoppingcart.request.AuthRequest
 import com.thesis.dawhey.shoppingcart.request.BindToCartRequest
 import com.thesis.dawhey.shoppingcart.response.AuthResponse
 import com.thesis.dawhey.shoppingcart.response.BindToCartResponse
+import com.thesis.dawhey.shoppingcart.response.GetScannedProductsResponse
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -13,6 +14,8 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 
 interface ApiService {
@@ -22,6 +25,9 @@ interface ApiService {
 
     @POST("bind")
     fun bindToCart(@Body request: BindToCartRequest): Single<BindToCartResponse>
+
+    @GET("products")
+    fun getCartProducts(@Query("token") token: String): Single<GetScannedProductsResponse>
 
     companion object {
         fun create(): ApiService {
