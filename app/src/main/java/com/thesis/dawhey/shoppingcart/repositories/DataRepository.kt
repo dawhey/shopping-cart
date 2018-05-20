@@ -15,4 +15,6 @@ interface DataRepository {
     fun authenticateUser(request: AuthRequest): Single<AuthResponse>
 
     fun bindUserToCart(request: BindToCartRequest): Single<BindToCartResponse>
+
+    fun logout()
 }

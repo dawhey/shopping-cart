@@ -16,6 +16,11 @@ class DataRepositoryImpl : DataRepository {
         ApiService.create()
     }
 
+    override fun logout() {
+        prefs.token = ""
+        prefs.cartId = ""
+    }
+
     override fun authenticateUser(request: AuthRequest): Single<AuthResponse> = api.authenticateUser(request)
 
     override fun bindUserToCart(request: BindToCartRequest): Single<BindToCartResponse> = api.bindToCart(request)
