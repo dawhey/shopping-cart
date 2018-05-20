@@ -26,7 +26,7 @@ class LoginActivity : RequestResponseActivity<AuthResponse, AuthRequest, LoginVi
             viewModel.request()
         }
 
-        if (viewModel.isAuthenticated) { startCartActivity() }
+        if (viewModel.isAuthenticated) startCartActivity()
     }
 
     override fun onSuccess() {

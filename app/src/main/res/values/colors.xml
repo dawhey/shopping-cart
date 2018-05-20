@@ -7,6 +7,6 @@
     <color name="colorPrimaryLight">#63a4ff</color>
     <color name="darkGrey">#424242</color>
     <color name="lightGrey">#e0e0e0</color>
-    <color name="darkOverlay">#20000000</color>
+    <color name="darkOverlay">#30000000</color>
     <color name="transparent">#00000000</color>
 </resources>

@@ -2,7 +2,6 @@
 
 <RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/loadingOverlay"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="match_parent"
     android:layout_width="match_parent">
 
@@ -18,14 +17,12 @@
             android:layout_marginTop="8dp"
             android:elevation="2dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_centerInParent="true" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/loadingOverlay">
 
         <RelativeLayout
             android:id="@+id/usernameView"
