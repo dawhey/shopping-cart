@@ -33,11 +33,11 @@ abstract class RequestResponseViewModel<T: Response, S: Request>(application: Ap
     abstract fun provideObservableResultData(request: S): Single<T>
 
     open fun onError(e: Throwable) {
-        viewStatus.value = ViewStatus.ERROR
+        viewStatus.value = ViewStatus.CONNECTION_ERROR
     }
 
     open fun onSuccess(response: T) = when (response.status) {
         ResponseStatus.SUCCESS -> viewStatus.value = ViewStatus.SUCCESS
-        ResponseStatus.FAILURE -> viewStatus.value = ViewStatus.ERROR
+        ResponseStatus.FAILURE -> viewStatus.value = ViewStatus.API_ERROR
     }
 }

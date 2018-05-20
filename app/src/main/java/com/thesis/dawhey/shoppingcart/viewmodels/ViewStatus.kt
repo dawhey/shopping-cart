@@ -3,5 +3,6 @@ package com.thesis.dawhey.shoppingcart.viewmodels
 enum class ViewStatus {
     LOADING,
     SUCCESS,
-    ERROR
+    API_ERROR,
+    CONNECTION_ERROR
 }

@@ -2,10 +2,10 @@ package com.thesis.dawhey.shoppingcart.response
 
 import com.google.gson.annotations.SerializedName
 
-enum class ResponseStatus {
+enum class ResponseStatus(val value: String) {
     @SerializedName("success")
-    SUCCESS,
+    SUCCESS("success"),
 
     @SerializedName("failure")
-    FAILURE
+    FAILURE("failure")
 }
