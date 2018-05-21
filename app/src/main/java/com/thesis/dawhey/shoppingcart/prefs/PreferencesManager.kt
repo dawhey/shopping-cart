@@ -11,12 +11,12 @@ class PreferencesManager(context: Context) {
 
     val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-    var token: String?
-        get() =  prefs.getString(KEY_TOKEN, null)
+    var token: String
+        get() =  prefs.getString(KEY_TOKEN, "")
         set(value) = prefs.edit().putString(KEY_TOKEN, value).apply()
 
-    var cartId: String?
-        get() = prefs.getString(KEY_CART_ID, null)
+    var cartId: String
+        get() = prefs.getString(KEY_CART_ID, "")
         set(value) = prefs.edit().putString(KEY_CART_ID, value).apply()
 
 

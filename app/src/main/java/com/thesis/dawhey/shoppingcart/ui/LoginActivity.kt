@@ -26,22 +26,16 @@ class LoginActivity : RequestResponseActivity<AuthResponse, AuthRequest, LoginVi
             viewModel.request()
         }
 
-        if (viewModel.isAuthenticated) startCartActivity()
+        if (viewModel.isAuthenticated) startActivity(CartActivity::class.java)
     }
 
     override fun onSuccess() {
         super.onSuccess()
-        startCartActivity()
+        startActivity(CartActivity::class.java)
     }
 
     override fun onApiError() {
         super.onApiError()
         Snackbar.make(findViewById(android.R.id.content), getString(R.string.auth_error), Snackbar.LENGTH_SHORT).show()
-    }
-
-    private fun startCartActivity() {
-        val intent = Intent(this, CartActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }

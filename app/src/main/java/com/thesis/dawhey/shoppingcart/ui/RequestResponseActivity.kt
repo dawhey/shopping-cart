@@ -1,6 +1,8 @@
 package com.thesis.dawhey.shoppingcart.ui
 
 import android.arch.lifecycle.Observer
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -11,6 +13,7 @@ import com.thesis.dawhey.shoppingcart.response.Response
 import com.thesis.dawhey.shoppingcart.viewmodels.RequestResponseViewModel
 import com.thesis.dawhey.shoppingcart.viewmodels.ViewStatus
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlin.reflect.KClass
 
 abstract class RequestResponseActivity<T: Response, S: Request, V: RequestResponseViewModel<T, S>> : AppCompatActivity() {
 
@@ -64,4 +67,10 @@ abstract class RequestResponseActivity<T: Response, S: Request, V: RequestRespon
     abstract fun provideToolbarTitle(): String
 
     abstract fun provideLayoutResource(): Int
+
+    fun startActivity(activity: Class<*>) {
+        val intent = Intent(this, activity)
+        startActivity(intent)
+        finish()
+    }
 }

@@ -23,10 +23,10 @@ class CartActivity : RequestResponseActivity<BindToCartResponse, BindToCartReque
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
         buttonNext.setOnClickListener {
-            viewModel.request = BindToCartRequest(prefs.token!!, inputCartId.text.toString())
+            viewModel.request = BindToCartRequest(prefs.token, inputCartId.text.toString())
             viewModel.request() }
 
-        if (viewModel.isCartAssigned) startMainActivity()
+        if (viewModel.isCartAssigned) startActivity(ShoppingActivity::class.java)
     }
 
     override fun onApiError() {
@@ -37,12 +37,6 @@ class CartActivity : RequestResponseActivity<BindToCartResponse, BindToCartReque
     override fun onSuccess() {
         super.onSuccess()
         prefs.cartId = inputCartId.text.toString()
-        startMainActivity()
-    }
-
-    private fun startMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+        startActivity(ShoppingActivity::class.java)
     }
 }
