@@ -11,6 +11,6 @@ class ProductViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
     fun bind(product: Product) = with(itemView) {
         productNameView.text = product.name
         productPrice.text = resources.getString(R.string.price_place_holder, product.price.toString())
-        productWeightView.text = resources.getString(R.string.weight_place_holder, product.weight.toString())
+        productWeightView.text = resources.getString(R.string.weight_place_holder, product.weight.toInt().toString())
     }
 }

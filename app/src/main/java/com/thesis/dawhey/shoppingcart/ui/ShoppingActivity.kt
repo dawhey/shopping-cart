@@ -4,8 +4,13 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.pusher.client.Pusher
+import com.pusher.client.PusherOptions
+import com.pusher.client.channel.SubscriptionEventListener
+import com.thesis.dawhey.shoppingcart.BuildConfig
 import com.thesis.dawhey.shoppingcart.R
 import com.thesis.dawhey.shoppingcart.adapters.ProductsAdapter
 import com.thesis.dawhey.shoppingcart.prefs
@@ -33,14 +38,15 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.subtitle = getString(R.string.cart_id_subtitle) + prefs.cartId
-        productsView.layoutManager = LinearLayoutManager(this, 0, false)
+        productsView.layoutManager = LinearLayoutManager(this)
+        productsView.adapter = adapter
 
         viewModel.products.observe(this, Observer {
-            with(adapter) {
-                products = it!!
-                notifyDataSetChanged()
-            }
+            adapter.products = it!!
+            adapter.notifyDataSetChanged()
         })
+
+        swipeRefreshView.setOnRefreshListener { viewModel.request() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -62,6 +68,18 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
     override fun onResume() {
         super.onResume()
         viewModel.request()
+    }
+
+    override fun onSuccess() {
+        swipeRefreshView.isRefreshing = false
+    }
+
+    override fun onConnectionError() {
+        swipeRefreshView.isRefreshing = false
+    }
+
+    override fun onApiError() {
+        swipeRefreshView.isRefreshing = false
     }
 
     override fun onLoading() {

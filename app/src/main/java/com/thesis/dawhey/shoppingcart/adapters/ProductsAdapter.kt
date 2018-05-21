@@ -11,7 +11,7 @@ fun ViewGroup.inflate(layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, false)
 }
 
-class ProductsAdapter() : RecyclerView.Adapter<ProductViewHolder>() {
+class ProductsAdapter : RecyclerView.Adapter<ProductViewHolder>() {
 
     var products: List<Product> = ArrayList()
 
