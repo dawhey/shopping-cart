@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ShoppingCart</string>
+    <string name="app_name">Shopping Cart</string>
     <string name="log_in">Log in</string>
     <string name="password">Password</string>
     <string name="username">Username</string>

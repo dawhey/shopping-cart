@@ -5,11 +5,11 @@ import android.content.SharedPreferences
 
 class PreferencesManager(context: Context) {
 
-    val PREF_NAME = "com.thesis.dawhey.shoppingcart.preferences"
-    val KEY_TOKEN = "token"
-    val KEY_CART_ID = "cart_id"
+    private val PREF_NAME = "com.thesis.dawhey.shoppingcart.preferences"
+    private val KEY_TOKEN = "token"
+    private val KEY_CART_ID = "cart_id"
 
-    val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+    private val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
     var token: String
         get() =  prefs.getString(KEY_TOKEN, "")

@@ -10,7 +10,7 @@ import io.reactivex.Single
 
 class CartViewModel(application: Application) : RequestResponseViewModel<BindToCartResponse, BindToCartRequest>(application) {
 
-    val isCartAssigned = !prefs.cartId.isNullOrEmpty()
+    val isCartAssigned = !prefs.cartId.isEmpty()
 
     override lateinit var request: BindToCartRequest
 

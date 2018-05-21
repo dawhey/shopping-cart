@@ -15,7 +15,9 @@ import io.reactivex.Single
 
 class ShoppingViewModel(application: Application) : RequestResponseViewModel<GetScannedProductsResponse, GetScannedProductsRequest>(application), PushEventListener {
 
-    val pusherManager: PusherManager = PusherManager(this)
+    init {
+        PusherManager(this)
+    }
 
     val products = MutableLiveData<MutableList<Product>>()
 

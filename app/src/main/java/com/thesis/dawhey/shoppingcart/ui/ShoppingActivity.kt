@@ -4,13 +4,8 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import com.pusher.client.Pusher
-import com.pusher.client.PusherOptions
-import com.pusher.client.channel.SubscriptionEventListener
-import com.thesis.dawhey.shoppingcart.BuildConfig
 import com.thesis.dawhey.shoppingcart.R
 import com.thesis.dawhey.shoppingcart.adapters.ProductsAdapter
 import com.thesis.dawhey.shoppingcart.prefs
