@@ -3,6 +3,7 @@ package com.thesis.dawhey.shoppingcart.ui
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
@@ -37,7 +38,8 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
         productsView.adapter = adapter
 
         viewModel.products.observe(this, Observer {
-            adapter.products = it!!
+            if (it!!.isEmpty()) Snackbar.make(findViewById(android.R.id.content), getString(R.string.cart_empty), Snackbar.LENGTH_SHORT).show()
+            adapter.products = it
             adapter.notifyDataSetChanged()
         })
 
