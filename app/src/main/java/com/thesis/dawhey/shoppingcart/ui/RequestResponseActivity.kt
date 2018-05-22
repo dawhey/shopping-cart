@@ -1,7 +1,6 @@
 package com.thesis.dawhey.shoppingcart.ui
 
 import android.arch.lifecycle.Observer
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -13,7 +12,6 @@ import com.thesis.dawhey.shoppingcart.response.Response
 import com.thesis.dawhey.shoppingcart.viewmodels.RequestResponseViewModel
 import com.thesis.dawhey.shoppingcart.viewmodels.ViewStatus
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlin.reflect.KClass
 
 abstract class RequestResponseActivity<T: Response, S: Request, V: RequestResponseViewModel<T, S>> : AppCompatActivity() {
 
@@ -42,24 +40,20 @@ abstract class RequestResponseActivity<T: Response, S: Request, V: RequestRespon
     }
 
     open fun onConnectionError() {
-        progressBar.visibility = View.GONE
-        loadingOverlay.setBackgroundColor(getColor(R.color.transparent))
+        progressBarHolder.visibility = View.GONE
         Snackbar.make(findViewById(android.R.id.content), "Connection error. Try again later.", Snackbar.LENGTH_SHORT).show()
     }
 
     open fun onApiError() {
-        progressBar.visibility = View.GONE
-        loadingOverlay.setBackgroundColor(getColor(R.color.transparent))
+        progressBarHolder.visibility = View.GONE
     }
 
     open fun onSuccess() {
-        progressBar.visibility = View.GONE
-        loadingOverlay.setBackgroundColor(getColor(R.color.transparent))
+        progressBarHolder.visibility = View.GONE
     }
 
     open fun onLoading() {
-        progressBar.visibility = View.VISIBLE
-        loadingOverlay.setBackgroundColor(getColor(R.color.darkOverlay))
+        progressBarHolder.visibility = View.VISIBLE
     }
 
     abstract fun provideViewModel(): V

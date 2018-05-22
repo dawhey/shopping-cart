@@ -10,22 +10,22 @@ class PusherManager(private val listener: PushEventListener) {
 
     private val gson: Gson = Gson()
 
-    private val channel = "shopping-cart-channel"
-    private val cluster = "eu"
-    private val addedEvent = "added-event"
-    private val removedEvent = "removed-event"
+    private val CHANNEL = "shopping-cart-channel"
+    private val CLUSTER = "eu"
+    private val ADDED_EVENT = "added-event"
+    private val REMOVED_EVENT = "removed-event"
 
     init {
         val options = PusherOptions()
-        options.setCluster(cluster)
+        options.setCluster(CLUSTER)
         val pusher = Pusher(BuildConfig.PUSHER_API_KEY, options)
-        val channel = pusher.subscribe(channel)
+        val channel = pusher.subscribe(CHANNEL)
 
-        channel.bind(addedEvent) { _, _, data ->
+        channel.bind(ADDED_EVENT) { _, _, data ->
             listener.onProductAdded(gson.fromJson(data, Product::class.java))
         }
 
-        channel.bind(removedEvent) { _, _, data ->
+        channel.bind(REMOVED_EVENT) { _, _, data ->
             listener.onProductRemoved(gson.fromJson(data, Product::class.java))
         }
 

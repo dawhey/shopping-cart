@@ -2,7 +2,6 @@ package com.thesis.dawhey.shoppingcart.ui
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.ViewModelProvider
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import com.thesis.dawhey.shoppingcart.R
