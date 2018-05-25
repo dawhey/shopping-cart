@@ -12,11 +12,11 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : RequestResponseActivity<AuthResponse, AuthRequest, LoginViewModel>(), LifecycleOwner {
 
-    override fun provideLayoutResource(): Int = R.layout.activity_login
+    override fun provideLayoutResource()= R.layout.activity_login
 
-    override fun provideToolbarTitle(): String = getString(R.string.log_in)
+    override fun provideToolbarTitle() = getString(R.string.log_in)
 
-    override fun provideViewModel(): LoginViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(LoginViewModel::class.java)
+    override fun provideViewModel() = ViewModelProvider.AndroidViewModelFactory(application).create(LoginViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

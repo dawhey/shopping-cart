@@ -16,5 +16,5 @@ class CartViewModel(application: Application) : RequestResponseViewModel<BindToC
 
     private val dataRepository: DataRepository = DataRepositoryImpl()
 
-    override fun provideObservableResultData(request: BindToCartRequest): Single<BindToCartResponse> = dataRepository.bindUserToCart(request)
+    override fun provideObservableResultData(request: BindToCartRequest) = dataRepository.bindUserToCart(request)
 }

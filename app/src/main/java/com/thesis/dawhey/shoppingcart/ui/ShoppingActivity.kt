@@ -25,11 +25,11 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
         ProductsAdapter()
     }
 
-    override fun provideViewModel(): ShoppingViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(ShoppingViewModel::class.java)
+    override fun provideViewModel() = ViewModelProvider.AndroidViewModelFactory(application).create(ShoppingViewModel::class.java)
 
-    override fun provideToolbarTitle(): String = getString(R.string.scanned_products)
+    override fun provideToolbarTitle() = getString(R.string.scanned_products)
 
-    override fun provideLayoutResource(): Int = R.layout.activity_shopping
+    override fun provideLayoutResource() = R.layout.activity_shopping
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -12,11 +12,11 @@ import kotlinx.android.synthetic.main.activity_cart.*
 
 class CartActivity : RequestResponseActivity<BindToCartResponse, BindToCartRequest, CartViewModel>() {
 
-    override fun provideViewModel(): CartViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(CartViewModel::class.java)
+    override fun provideViewModel() = ViewModelProvider.AndroidViewModelFactory(application).create(CartViewModel::class.java)
 
-    override fun provideToolbarTitle(): String = "Select shopping cart"
+    override fun provideToolbarTitle() = "Select shopping cart"
 
-    override fun provideLayoutResource(): Int = R.layout.activity_cart
+    override fun provideLayoutResource() = R.layout.activity_cart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -25,8 +25,7 @@ class ShoppingViewModel(application: Application) : RequestResponseViewModel<Get
 
     override var request: GetScannedProductsRequest = GetScannedProductsRequest(prefs.token)
 
-    override fun provideObservableResultData(request: GetScannedProductsRequest): Single<GetScannedProductsResponse> =
-            dataRepository.getScannedProducts(request)
+    override fun provideObservableResultData(request: GetScannedProductsRequest) = dataRepository.getScannedProducts(request)
 
     override fun onSuccess(response: GetScannedProductsResponse) {
         super.onSuccess(response)
