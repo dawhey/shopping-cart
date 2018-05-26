@@ -16,6 +16,7 @@ import com.thesis.dawhey.shoppingcart.repositories.DataRepository
 import com.thesis.dawhey.shoppingcart.repositories.DataRepositoryImpl
 import com.thesis.dawhey.shoppingcart.request.GetScannedProductsRequest
 import com.thesis.dawhey.shoppingcart.response.GetScannedProductsResponse
+import com.thesis.dawhey.shoppingcart.utils.ScanningUtils
 import com.thesis.dawhey.shoppingcart.viewmodels.ShoppingViewModel
 import kotlinx.android.synthetic.main.activity_shopping.*
 
@@ -88,13 +89,13 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
         swipeRefreshView.isRefreshing = true
     }
 
-    fun startScanningActivity() {
+    private fun startScanningActivity() {
         try {
-            val intent = Intent("com.google.zxing.client.android.SCAN")
-            intent.putExtra("SCAN_MODE", "QR_CODE_MODE")
+            val intent = Intent(ScanningUtils.SCAN_INTENT)
+            intent.putExtra(ScanningUtils.SCAN_MODE_KEY, ScanningUtils.SCAN_MODE_VALUE)
             startActivityForResult(intent, 0)
         } catch (e: Exception) {
-            val marketUri = Uri.parse("market://details?id=com.google.zxing.client.android")
+            val marketUri = Uri.parse(ScanningUtils.ZXING_CLIENT_URI)
             val marketIntent = Intent(Intent.ACTION_VIEW,marketUri)
             startActivity(marketIntent)
         }
