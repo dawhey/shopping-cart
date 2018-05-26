@@ -2,6 +2,8 @@ package com.thesis.dawhey.shoppingcart.ui
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
@@ -58,6 +60,9 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
                 dataRepository.logout()
                 startActivity(LoginActivity::class.java)
             }
+            R.id.scan -> {
+                startScanningActivity()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -81,5 +86,17 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
 
     override fun onLoading() {
         swipeRefreshView.isRefreshing = true
+    }
+
+    fun startScanningActivity() {
+        try {
+            val intent = Intent("com.google.zxing.client.android.SCAN")
+            intent.putExtra("SCAN_MODE", "QR_CODE_MODE")
+            startActivityForResult(intent, 0)
+        } catch (e: Exception) {
+            val marketUri = Uri.parse("market://details?id=com.google.zxing.client.android")
+            val marketIntent = Intent(Intent.ACTION_VIEW,marketUri)
+            startActivity(marketIntent)
+        }
     }
 }

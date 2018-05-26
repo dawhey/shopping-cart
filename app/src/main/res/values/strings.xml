@@ -14,5 +14,6 @@
     <string name="price_place_holder"> %1$s zł.</string>
     <string name="weight_place_holder">%1$sg</string>
     <string name="cart_empty">Your shopping cart is empty.</string>
+    <string name="scan">Scan products</string>
 
 </resources>

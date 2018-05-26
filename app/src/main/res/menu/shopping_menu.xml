@@ -7,4 +7,10 @@
         app:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_log_out"
         />
+    <item
+        android:id="@+id/scan"
+        android:title="@string/scan"
+        app:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_scan"
+        />
 </menu>
