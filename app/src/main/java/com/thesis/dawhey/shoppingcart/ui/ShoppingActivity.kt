@@ -46,7 +46,7 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
             if (it!!.isEmpty()) Snackbar.make(findViewById(android.R.id.content), getString(R.string.cart_empty), Snackbar.LENGTH_SHORT).show()
             adapter.products = it
             adapter.notifyDataSetChanged()
-            supportActionBar?.title = "Subtotal: " + it.map { it.price }.sum() + " zł"
+            supportActionBar?.title = getString(R.string.subtotal_place_holder, it.map { it.price }.sum())
         })
 
         viewModel.productScanStatus.observe(this, Observer {
