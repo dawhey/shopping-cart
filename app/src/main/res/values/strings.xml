@@ -16,5 +16,7 @@
     <string name="subtotal_place_holder">Subtotal: %1$.2f zł.</string>
     <string name="cart_empty">Your shopping cart is empty.</string>
     <string name="scan">Scan products</string>
+    <string name="scanned">Product scanned.</string>
+    <string name="scanned_failure">Product scan failure.</string>
 
 </resources>

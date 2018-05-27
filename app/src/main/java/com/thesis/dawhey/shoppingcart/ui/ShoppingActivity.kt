@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.thesis.dawhey.shoppingcart.R
 import com.thesis.dawhey.shoppingcart.adapters.ProductsAdapter
 import com.thesis.dawhey.shoppingcart.prefs
@@ -41,9 +42,10 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
         supportActionBar?.subtitle = getString(R.string.cart_id_subtitle) + prefs.cartId
         productsView.layoutManager = LinearLayoutManager(this)
         productsView.adapter = adapter
+        val content: View = findViewById(android.R.id.content)
 
         viewModel.products.observe(this, Observer {
-            if (it!!.isEmpty()) Snackbar.make(findViewById(android.R.id.content), getString(R.string.cart_empty), Snackbar.LENGTH_SHORT).show()
+            if (it!!.isEmpty()) Snackbar.make(content, getString(R.string.cart_empty), Snackbar.LENGTH_SHORT).show()
             adapter.products = it
             adapter.notifyDataSetChanged()
             supportActionBar?.title = getString(R.string.subtotal_place_holder, it.map { it.price }.sum())
@@ -51,8 +53,8 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
 
         viewModel.productScanStatus.observe(this, Observer {
             when(it) {
-                ScanStatus.SCAN_OK -> Snackbar.make(findViewById(android.R.id.content), "Product scanned.", Snackbar.LENGTH_SHORT).show()
-                ScanStatus.SCAN_FAILURE -> Snackbar.make(findViewById(android.R.id.content), "Product scan failure.", Snackbar.LENGTH_SHORT).show()
+                ScanStatus.SCAN_OK -> Snackbar.make(content, getString(R.string.scanned), Snackbar.LENGTH_SHORT).show()
+                ScanStatus.SCAN_FAILURE -> Snackbar.make(content, getString(R.string.scanned_failure), Snackbar.LENGTH_SHORT).show()
             }
         })
 
