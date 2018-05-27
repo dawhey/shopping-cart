@@ -1,5 +1,6 @@
 package com.thesis.dawhey.shoppingcart.ui
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
@@ -16,7 +17,8 @@ import com.thesis.dawhey.shoppingcart.repositories.DataRepository
 import com.thesis.dawhey.shoppingcart.repositories.DataRepositoryImpl
 import com.thesis.dawhey.shoppingcart.request.GetScannedProductsRequest
 import com.thesis.dawhey.shoppingcart.response.GetScannedProductsResponse
-import com.thesis.dawhey.shoppingcart.utils.ScanningUtils
+import com.thesis.dawhey.shoppingcart.utils.ScanUtils
+import com.thesis.dawhey.shoppingcart.viewmodels.ScanStatus
 import com.thesis.dawhey.shoppingcart.viewmodels.ShoppingViewModel
 import kotlinx.android.synthetic.main.activity_shopping.*
 
@@ -44,6 +46,13 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
             if (it!!.isEmpty()) Snackbar.make(findViewById(android.R.id.content), getString(R.string.cart_empty), Snackbar.LENGTH_SHORT).show()
             adapter.products = it
             adapter.notifyDataSetChanged()
+        })
+
+        viewModel.productScanStatus.observe(this, Observer {
+            when(it) {
+                ScanStatus.SCAN_OK -> Snackbar.make(findViewById(android.R.id.content), "Product scanned.", Snackbar.LENGTH_SHORT).show()
+                ScanStatus.SCAN_FAILURE -> Snackbar.make(findViewById(android.R.id.content), "Product scan failure.", Snackbar.LENGTH_SHORT).show()
+            }
         })
 
         swipeRefreshView.setOnRefreshListener { viewModel.request() }
@@ -91,13 +100,22 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
 
     private fun startScanningActivity() {
         try {
-            val intent = Intent(ScanningUtils.SCAN_INTENT)
-            intent.putExtra(ScanningUtils.SCAN_MODE_KEY, ScanningUtils.SCAN_MODE_VALUE)
+            val intent = Intent(ScanUtils.SCAN_INTENT)
+            intent.putExtra(ScanUtils.SCAN_MODE_KEY, ScanUtils.SCAN_MODE_VALUE)
             startActivityForResult(intent, 0)
         } catch (e: Exception) {
-            val marketUri = Uri.parse(ScanningUtils.ZXING_CLIENT_URI)
+            val marketUri = Uri.parse(ScanUtils.ZXING_CLIENT_URI)
             val marketIntent = Intent(Intent.ACTION_VIEW,marketUri)
             startActivity(marketIntent)
+        }
+    }
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
+        if (requestCode == 0) {
+            if (resultCode == Activity.RESULT_OK) {
+                val contents = intent.getStringExtra(ScanUtils.SCAN_RESULT)
+                viewModel.scanProduct(contents)
+            }
         }
     }
 }
