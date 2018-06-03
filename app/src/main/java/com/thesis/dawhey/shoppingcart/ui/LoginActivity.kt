@@ -25,12 +25,12 @@ class LoginActivity : RequestResponseActivity<AuthResponse, AuthRequest, LoginVi
             viewModel.request()
         }
 
-        if (viewModel.isAuthenticated) startActivity(CartActivity::class.java)
+        if (viewModel.isAuthenticated) startActivity(ScanningDeviceActivity::class.java)
     }
 
     override fun onSuccess() {
         super.onSuccess()
-        startActivity(CartActivity::class.java)
+        startActivity(ScanningDeviceActivity::class.java)
     }
 
     override fun onApiError() {

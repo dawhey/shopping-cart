@@ -18,7 +18,7 @@ class DataRepositoryImpl : DataRepository {
 
     override fun logout() {
         prefs.token = ""
-        prefs.cartId = ""
+        prefs.deviceId = ""
     }
 
     override fun authenticateUser(request: AuthRequest): Single<AuthResponse> = api.authenticateUser(request)

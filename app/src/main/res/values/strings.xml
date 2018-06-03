@@ -5,8 +5,8 @@
     <string name="username">Username</string>
     <string name="auth_error">Authentication error. Invalid credentials.</string>
     <string name="next">Next</string>
-    <string name="cart_id">Cart ID</string>
-    <string name="invalid_cart_id">No cart with provided ID.</string>
+    <string name="device_id">Device ID</string>
+    <string name="invalid_device_id">No device with provided ID.</string>
     <string name="log_out">Log out</string>
     <string name="scanned_products">Scanned products</string>
     <string name="cart_id_subtitle">Shopping cart ID:</string>

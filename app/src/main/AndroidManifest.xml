@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.CartActivity" />
+        <activity android:name=".ui.ScanningDeviceActivity" />
     </application>
 
 </manifest>
