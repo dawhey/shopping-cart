@@ -1,5 +1,6 @@
 package com.thesis.dawhey.shoppingcart.ui
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
@@ -61,10 +62,10 @@ abstract class RequestResponseActivity<T: Response, S: Request, V: RequestRespon
     abstract fun provideToolbarTitle(): String
 
     abstract fun provideLayoutResource(): Int
+}
 
-    fun startActivity(activity: Class<*>) {
-        val intent = Intent(this, activity)
-        startActivity(intent)
-        finish()
-    }
+fun Activity.startActivity(activity: Class<*>) {
+    val intent = Intent(this, activity)
+    startActivity(intent)
+    finish()
 }

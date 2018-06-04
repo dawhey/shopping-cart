@@ -3,9 +3,11 @@ package com.thesis.dawhey.shoppingcart.api
 import com.thesis.dawhey.shoppingcart.BuildConfig
 import com.thesis.dawhey.shoppingcart.request.AuthRequest
 import com.thesis.dawhey.shoppingcart.request.BindToCartRequest
+import com.thesis.dawhey.shoppingcart.request.ProductScanRequest
 import com.thesis.dawhey.shoppingcart.response.AuthResponse
 import com.thesis.dawhey.shoppingcart.response.BindToCartResponse
 import com.thesis.dawhey.shoppingcart.response.GetScannedProductsResponse
+import com.thesis.dawhey.shoppingcart.response.ProductScanResponse
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -19,6 +21,9 @@ import retrofit2.http.Query
 
 
 interface ApiService {
+
+    @POST("scan")
+    fun scanProduct(@Body request: ProductScanRequest): Single<ProductScanResponse>
 
     @POST("authenticate")
     fun authenticateUser(@Body request: AuthRequest): Single<AuthResponse>

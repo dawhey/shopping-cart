@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_scanning_device.*
 
 class ScanningDeviceActivity : RequestResponseActivity<BindToCartResponse, BindToCartRequest, ScanningDeviceViewModel>() {
 
+
     override fun provideViewModel(): ScanningDeviceViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(ScanningDeviceViewModel::class.java)
 
     override fun provideToolbarTitle(): String = "Select scanning device"

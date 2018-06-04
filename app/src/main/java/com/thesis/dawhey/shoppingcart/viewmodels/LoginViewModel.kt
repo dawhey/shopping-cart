@@ -16,7 +16,7 @@ class LoginViewModel(application: Application): RequestResponseViewModel<AuthRes
 
     val isAuthenticated: Boolean = !prefs.token.isEmpty()
 
-    override fun provideObservableResultData(request: AuthRequest): Single<AuthResponse> = dataRepository.authenticateUser(request)
+    override fun provideObservableResultData(request: AuthRequest) = dataRepository.authenticateUser(request)
 
     override fun onSuccess(response: AuthResponse) {
         super.onSuccess(response)

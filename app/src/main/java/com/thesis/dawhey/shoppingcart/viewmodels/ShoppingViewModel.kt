@@ -9,8 +9,13 @@ import com.thesis.dawhey.shoppingcart.pusher.PusherManager
 import com.thesis.dawhey.shoppingcart.repositories.DataRepository
 import com.thesis.dawhey.shoppingcart.repositories.DataRepositoryImpl
 import com.thesis.dawhey.shoppingcart.request.GetScannedProductsRequest
+import com.thesis.dawhey.shoppingcart.request.ProductScanRequest
 import com.thesis.dawhey.shoppingcart.response.GetScannedProductsResponse
-import io.reactivex.Single
+import com.thesis.dawhey.shoppingcart.response.ProductScanResponse
+import com.thesis.dawhey.shoppingcart.response.ResponseStatus
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 
 
 class ShoppingViewModel(application: Application) : RequestResponseViewModel<GetScannedProductsResponse, GetScannedProductsRequest>(application), PushEventListener {
@@ -19,14 +24,15 @@ class ShoppingViewModel(application: Application) : RequestResponseViewModel<Get
         PusherManager(this)
     }
 
+    val productScanStatus = MutableLiveData<ScanStatus>()
+
     val products = MutableLiveData<MutableList<Product>>()
 
     private val dataRepository: DataRepository = DataRepositoryImpl()
 
     override var request: GetScannedProductsRequest = GetScannedProductsRequest(prefs.token)
 
-    override fun provideObservableResultData(request: GetScannedProductsRequest): Single<GetScannedProductsResponse> =
-            dataRepository.getScannedProducts(request)
+    override fun provideObservableResultData(request: GetScannedProductsRequest) = dataRepository.getScannedProducts(request)
 
     override fun onSuccess(response: GetScannedProductsResponse) {
         super.onSuccess(response)
@@ -47,5 +53,23 @@ class ShoppingViewModel(application: Application) : RequestResponseViewModel<Get
             remove(p)
             this@ShoppingViewModel.products.postValue(this)
         }
+    }
+
+    fun scanProduct(productId: String) {
+        dataRepository.scanProduct(ProductScanRequest(prefs.deviceId, productId))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : DisposableSingleObserver<ProductScanResponse>() {
+                    override fun onSuccess(t: ProductScanResponse) {
+                        when (t.status) {
+                            ResponseStatus.SUCCESS -> productScanStatus.value = ScanStatus.SCAN_OK
+                            ResponseStatus.FAILURE -> productScanStatus.value = ScanStatus.SCAN_FAILURE
+                        }
+                    }
+
+                    override fun onError(e: Throwable) {
+                        viewStatus.value = ViewStatus.CONNECTION_ERROR
+                    }
+                })
     }
 }

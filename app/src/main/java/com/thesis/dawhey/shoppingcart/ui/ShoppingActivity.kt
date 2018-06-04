@@ -1,12 +1,16 @@
 package com.thesis.dawhey.shoppingcart.ui
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.thesis.dawhey.shoppingcart.R
 import com.thesis.dawhey.shoppingcart.adapters.ProductsAdapter
 import com.thesis.dawhey.shoppingcart.prefs
@@ -14,6 +18,8 @@ import com.thesis.dawhey.shoppingcart.repositories.DataRepository
 import com.thesis.dawhey.shoppingcart.repositories.DataRepositoryImpl
 import com.thesis.dawhey.shoppingcart.request.GetScannedProductsRequest
 import com.thesis.dawhey.shoppingcart.response.GetScannedProductsResponse
+import com.thesis.dawhey.shoppingcart.utils.ScanUtils
+import com.thesis.dawhey.shoppingcart.viewmodels.ScanStatus
 import com.thesis.dawhey.shoppingcart.viewmodels.ShoppingViewModel
 import kotlinx.android.synthetic.main.activity_shopping.*
 
@@ -25,22 +31,31 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
         ProductsAdapter()
     }
 
-    override fun provideViewModel(): ShoppingViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(ShoppingViewModel::class.java)
+    override fun provideViewModel() = ViewModelProvider.AndroidViewModelFactory(application).create(ShoppingViewModel::class.java)
 
-    override fun provideToolbarTitle(): String = getString(R.string.scanned_products)
+    override fun provideToolbarTitle() = getString(R.string.scanned_products)
 
-    override fun provideLayoutResource(): Int = R.layout.activity_shopping
+    override fun provideLayoutResource() = R.layout.activity_shopping
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.subtitle = getString(R.string.cart_id_subtitle) + prefs.deviceId
         productsView.layoutManager = LinearLayoutManager(this)
         productsView.adapter = adapter
+        val content: View = findViewById(android.R.id.content)
 
         viewModel.products.observe(this, Observer {
-            if (it!!.isEmpty()) Snackbar.make(findViewById(android.R.id.content), getString(R.string.cart_empty), Snackbar.LENGTH_SHORT).show()
+            if (it!!.isEmpty()) Snackbar.make(content, getString(R.string.cart_empty), Snackbar.LENGTH_SHORT).show()
             adapter.products = it
             adapter.notifyDataSetChanged()
+            supportActionBar?.title = getString(R.string.subtotal_place_holder, it.map { it.price }.sum())
+        })
+
+        viewModel.productScanStatus.observe(this, Observer {
+            when(it) {
+                ScanStatus.SCAN_OK -> Snackbar.make(content, getString(R.string.scanned), Snackbar.LENGTH_SHORT).show()
+                ScanStatus.SCAN_FAILURE -> Snackbar.make(content, getString(R.string.scanned_failure), Snackbar.LENGTH_SHORT).show()
+            }
         })
 
         swipeRefreshView.setOnRefreshListener { viewModel.request() }
@@ -57,6 +72,9 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
             R.id.logout -> {
                 dataRepository.logout()
                 startActivity(LoginActivity::class.java)
+            }
+            R.id.scan -> {
+                startScanningActivity()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -81,5 +99,26 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
 
     override fun onLoading() {
         swipeRefreshView.isRefreshing = true
+    }
+
+    private fun startScanningActivity() {
+        try {
+            val intent = Intent(ScanUtils.SCAN_INTENT)
+            intent.putExtra(ScanUtils.SCAN_MODE_KEY, ScanUtils.SCAN_MODE_VALUE)
+            startActivityForResult(intent, 0)
+        } catch (e: Exception) {
+            val marketUri = Uri.parse(ScanUtils.ZXING_CLIENT_URI)
+            val marketIntent = Intent(Intent.ACTION_VIEW,marketUri)
+            startActivity(marketIntent)
+        }
+    }
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
+        if (requestCode == 0) {
+            if (resultCode == Activity.RESULT_OK) {
+                val contents = intent.getStringExtra(ScanUtils.SCAN_RESULT)
+                viewModel.scanProduct(contents)
+            }
+        }
     }
 }
