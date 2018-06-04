@@ -8,9 +8,9 @@ import com.thesis.dawhey.shoppingcart.request.BindToCartRequest
 import com.thesis.dawhey.shoppingcart.response.BindToCartResponse
 import io.reactivex.Single
 
-class CartViewModel(application: Application) : RequestResponseViewModel<BindToCartResponse, BindToCartRequest>(application) {
+class ScanningDeviceViewModel(application: Application) : RequestResponseViewModel<BindToCartResponse, BindToCartRequest>(application) {
 
-    val isCartAssigned = !prefs.cartId.isEmpty()
+    val isCartAssigned = !prefs.deviceId.isEmpty()
 
     override lateinit var request: BindToCartRequest
 

@@ -7,7 +7,7 @@ class PreferencesManager(context: Context) {
 
     private val PREF_NAME = "com.thesis.dawhey.shoppingcart.preferences"
     private val KEY_TOKEN = "token"
-    private val KEY_CART_ID = "cart_id"
+    private val KEY_DEVICE_ID = "device_id"
 
     private val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
@@ -15,9 +15,9 @@ class PreferencesManager(context: Context) {
         get() =  prefs.getString(KEY_TOKEN, "")
         set(value) = prefs.edit().putString(KEY_TOKEN, value).apply()
 
-    var cartId: String
-        get() = prefs.getString(KEY_CART_ID, "")
-        set(value) = prefs.edit().putString(KEY_CART_ID, value).apply()
+    var deviceId: String
+        get() = prefs.getString(KEY_DEVICE_ID, "")
+        set(value) = prefs.edit().putString(KEY_DEVICE_ID, value).apply()
 
 
 }

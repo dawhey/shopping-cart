@@ -39,7 +39,7 @@ class ShoppingActivity : RequestResponseActivity<GetScannedProductsResponse, Get
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.subtitle = getString(R.string.cart_id_subtitle) + prefs.cartId
+        supportActionBar?.subtitle = getString(R.string.cart_id_subtitle) + prefs.deviceId
         productsView.layoutManager = LinearLayoutManager(this)
         productsView.adapter = adapter
         val content: View = findViewById(android.R.id.content)

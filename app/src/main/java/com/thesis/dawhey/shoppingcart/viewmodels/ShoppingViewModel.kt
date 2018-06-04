@@ -56,7 +56,7 @@ class ShoppingViewModel(application: Application) : RequestResponseViewModel<Get
     }
 
     fun scanProduct(productId: String) {
-        dataRepository.scanProduct(ProductScanRequest(prefs.cartId, productId))
+        dataRepository.scanProduct(ProductScanRequest(prefs.deviceId, productId))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : DisposableSingleObserver<ProductScanResponse>() {

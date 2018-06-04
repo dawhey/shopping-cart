@@ -7,20 +7,21 @@ import com.thesis.dawhey.shoppingcart.R
 import com.thesis.dawhey.shoppingcart.prefs
 import com.thesis.dawhey.shoppingcart.request.BindToCartRequest
 import com.thesis.dawhey.shoppingcart.response.BindToCartResponse
-import com.thesis.dawhey.shoppingcart.viewmodels.CartViewModel
-import kotlinx.android.synthetic.main.activity_cart.*
+import com.thesis.dawhey.shoppingcart.viewmodels.ScanningDeviceViewModel
+import kotlinx.android.synthetic.main.activity_scanning_device.*
 
-class CartActivity : RequestResponseActivity<BindToCartResponse, BindToCartRequest, CartViewModel>() {
+class ScanningDeviceActivity : RequestResponseActivity<BindToCartResponse, BindToCartRequest, ScanningDeviceViewModel>() {
 
-    override fun provideViewModel() = ViewModelProvider.AndroidViewModelFactory(application).create(CartViewModel::class.java)
 
-    override fun provideToolbarTitle() = "Select shopping cart"
+    override fun provideViewModel(): ScanningDeviceViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(ScanningDeviceViewModel::class.java)
 
-    override fun provideLayoutResource() = R.layout.activity_cart
+    override fun provideToolbarTitle(): String = "Select scanning device"
+
+    override fun provideLayoutResource(): Int = R.layout.activity_scanning_device
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cart)
+        setContentView(R.layout.activity_scanning_device)
         buttonNext.setOnClickListener {
             viewModel.request = BindToCartRequest(prefs.token, inputCartId.text.toString())
             viewModel.request() }
@@ -30,12 +31,12 @@ class CartActivity : RequestResponseActivity<BindToCartResponse, BindToCartReque
 
     override fun onApiError() {
         super.onApiError()
-        Snackbar.make(findViewById(android.R.id.content), getString(R.string.invalid_cart_id), Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.invalid_device_id), Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onSuccess() {
         super.onSuccess()
-        prefs.cartId = inputCartId.text.toString()
+        prefs.deviceId = inputCartId.text.toString()
         startActivity(ShoppingActivity::class.java)
     }
 }
